@@ -27,7 +27,7 @@ The first two aspects were introduced in the [DeepSeek R1 paper](https://arxiv.o
 
 The GRPO can be described as the following formula:
 $$
-\mathcal{L}_{GRPO}(\theta) = \mathbb{E}_{ \substack{q \sim P(Q)  \\ \{o_i\}^G_{i=1} \sim \pi_{\theta_{old}} (O|q)}} [\mathcal{L}^\backprime_{PG-GRPO}(\cdot | \theta) + \beta \mathcal{L}^\backprime_{KL}(\cdot, \theta, \theta_{ref}) + \alpha \mathcal{L}^\backprime_{Entropy}(\cdot, \theta)]
+\mathcal{L}_{GRPO}(\theta) = \mathbb{E}_{ \substack{q \sim P(Q)  \\ \{o_i\}^G_{i=1} \sim \pi_{\theta_{old}} (O|q)}} [ \mathcal{L}^\backprime_{PG-GRPO}(\cdot | \theta) + \beta \mathcal{L}^\backprime_{KL}(\cdot, \theta, \theta_{ref}) + \alpha \mathcal{L}^\backprime_{Entropy}(\cdot, \theta) ]
 $$
 
 - $E$ is the expected value. The expected value of a random variable with a finite number of outcomes is a weighted average of all possible outcomes.
