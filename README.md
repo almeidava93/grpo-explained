@@ -47,18 +47,18 @@ The GRPO can be described as the following formula:
 Defined by:
 
 ```math
-\mathcal{L}^\backprime_{PG-GRPO}(q, \{o_i\}_{i=1}^G, \theta) = - \frac{1}{G} \sum^G_{i=1} \left(min \left(\frac{\pi_\theta (o_i|q)}{\pi_{\theta_{old}}(o_i|q)} \^{A_i}, clip \left(\frac{\pi_\theta (o_i|q)}{\pi_{\theta_{old}}(o_i|q)}, 1-\varepsilon, 1+\varepsilon\right) \^{A_i}\right) \right)
+\mathcal{L}^\backprime_{PG-GRPO}(q, \{o_i\}_{i=1}^G, \theta) = - \frac{1}{G} \sum^G_{i=1} \left(min \left(\frac{\pi_\theta (o_i|q)}{\pi_{\theta_{old}}(o_i|q)} \hat{A_i}, clip \left(\frac{\pi_\theta (o_i|q)}{\pi_{\theta_{old}}(o_i|q)}, 1-\varepsilon, 1+\varepsilon\right) \hat{A_i}\right) \right)
 ```
 
 - $\theta_{ref}$ is the reference model.
 - $\frac{\pi_\theta (o_i|q)}{\pi_{\theta_{old}}(o_i|q)}$ measures how much the probability distribution of the model changed with respect to the old response. Each part of this fraction $\pi_\theta (o_i|q)$ and $\pi_{\theta_{old}}(o_i|q)$ represents the probability of each model output that specific sequence of tokens.
 - $\varepsilon$  is a hyperparameter of the clipping threshold.
-- $\^{A_i}$ is the group-normalized advantage. This carries information about the quality of the response. A bigger number means greater quality and vice-versa. The hat simply means that the advantage is normalized.
+- $\hat{A_i}$ is the group-normalized advantage. This carries information about the quality of the response. A bigger number means greater quality and vice-versa. The hat simply means that the advantage is normalized.
 
 The group-normalized advantage is defined by:
 
 ```math
-\^{A_i} = \frac{
+\hat{A_i} = \frac{
     r_i - mean(\{ r_1, r_2, ..., r_G \})
 }{
     std(\{r_1, r_2, ..., r_G\})
