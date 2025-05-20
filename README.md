@@ -26,9 +26,9 @@ The GRPO loss function, as implemented in the DeepSeek R1 paper, has two main co
 The first two aspects were introduced in the [DeepSeek R1 paper](https://arxiv.org/abs/2501.12948) and in the [DeepSeekMath paper](https://arxiv.org/abs/2402.03300). The entropy loss factor is present in another paper entitled [Reinforcement Learning for Reasoning in Large Language Models with One Training Example](https://arxiv.org/abs/2504.20571), by Wang et al.
 
 The GRPO can be described as the following formula:
-$$
+```math
 \mathcal{L}_{GRPO}(\theta) = \mathbb{E}_{ \substack{q \sim P(Q)  \\ \{o_i\}^G_{i=1} \sim \pi_{\theta_{old}} (O|q)}} [ \mathcal{L}^\backprime_{PG-GRPO}(\cdot | \theta) + \beta \mathcal{L}^\backprime_{KL}(\cdot, \theta, \theta_{ref}) + \alpha \mathcal{L}^\backprime_{Entropy}(\cdot, \theta) ]
-$$
+```
 
 - $E$ is the expected value. The expected value of a random variable with a finite number of outcomes is a weighted average of all possible outcomes.
 - $\theta$ represents the trainable parameters of the current model or the vector of the network weights. $\theta_{ref}$ represents the trainable parameters of the reference model.
