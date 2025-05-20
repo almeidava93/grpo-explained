@@ -46,9 +46,9 @@ The GRPO can be described as the following formula:
 
 Defined by:
 
-$$
+```math
 \mathcal{L}^\backprime_{PG-GRPO}(q, \{o_i\}_{i=1}^G, \theta) = - \frac{1}{G} \sum^G_{i=1} \left(min \left(\frac{\pi_\theta (o_i|q)}{\pi_{\theta_{old}}(o_i|q)} \^{A_i}, clip \left(\frac{\pi_\theta (o_i|q)}{\pi_{\theta_{old}}(o_i|q)}, 1-\varepsilon, 1+\varepsilon\right) \^{A_i}\right) \right)
-$$
+```
 
 - $\theta_{ref}$ is the reference model.
 - $\frac{\pi_\theta (o_i|q)}{\pi_{\theta_{old}}(o_i|q)}$ measures how much the probability distribution of the model changed with respect to the old response. Each part of this fraction $\pi_\theta (o_i|q)$ and $\pi_{\theta_{old}}(o_i|q)$ represents the probability of each model output that specific sequence of tokens.
@@ -57,13 +57,13 @@ $$
 
 The group-normalized advantage is defined by:
 
-$$
+```math
 \^{A_i} = \frac{
     r_i - mean(\{ r_1, r_2, ..., r_G \})
 }{
     std(\{r_1, r_2, ..., r_G\})
 } \hspace{1cm} i \in [G]
-$$
+```
 
 ```python
 def group_normalised_advantage(rewards: torch.Tensor) -> torch.Tensor:
@@ -83,9 +83,9 @@ def group_normalised_advantage(rewards: torch.Tensor) -> torch.Tensor:
 
 **Entropy** is defined by:
 
-$$
+```math
 H(P) = -\sum_i p_i log(p_i)
-$$
+```
 
 ```python
 def entropy_from_logits(logits: torch.Tensor, mask: torch.Tensor = None):
@@ -112,9 +112,9 @@ Zero entropy means no surprise (the outcome is certain); higher entropy means mo
 
 Cross-entropy is a similar definition but compares two different probability distributions. Defined by:
 
-$$
+```math
 H(P|Q) = -\sum_i p_i log(q_i)
-$$
+```
 
 ```python
 def cross_entropy_from_logits(
@@ -161,9 +161,9 @@ This is the cross entropy between two probability distributions: P and Q, where 
 
 **KL divergence** is then defined by:
 
-$$
+```math
 \mathbb{D}_{KL}(P||Q) = H(P|Q) - H(P)
-$$
+```
 
 ```python
 # KL divergence
@@ -201,13 +201,13 @@ KL divergence is the change in cross-entropy. KL is zero when both distributions
 
 The DeepSeek papers use an approximated version of KL Divergence defined in this [blog post by John Schulman](http://joschu.net/blog/kl-approx.html):
 
-$$
+```math
 \mathcal{L}^\backprime_{KL}(q, \{o_i\}^G_{i=1}, \theta, \theta_{ref}) = \mathbb{D}_{KL}(\pi_\theta||\pi_{\pi_{ref}})
-$$
+```
 
-$$
+```math
 \mathbb{D}_{KL}(\pi_\theta||\pi_{\pi_{ref}}) = \frac{\pi_{\theta{ref}}(o_i|q)}{\pi_{\theta}(o_i|q)} - log\frac{\pi_{\theta{ref}}(o_i|q)}{\pi_{\theta}(o_i|q)} - 1
-$$
+```
 
 ```python
 import torch
@@ -265,9 +265,9 @@ def approximate_kl_divergence(
 ### 3. Entropy loss
 The third term is simply the entropy in the generated responses, and can be computed as above. It is important to not forget about masking padding tokens, since they do not carry meaningful information for the training. 
 
-$$
+```math
 \mathcal{L}^\backprime_{Entropy}(\cdot, \theta) = \frac{\sum_{b, s} M_{b,s}\cdot H_{b,s}(X)}{\sum_{b,s}M_{b,s}}
-$$
+```
 
 - $X$ is the generated logits
 - $M_{b,s}$ is the mask. $b$ and $s$ index the batch and the sequence position
