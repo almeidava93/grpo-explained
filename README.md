@@ -276,7 +276,7 @@ The python implementation is the same as in the `entropy_from_logits` function i
 
 ## Minimal Python implementation
 
-The module `grpo.py` contains a full working script using dummy data and the Llama 3.2 1B model. You should be able to run it locally or in Google colab. 
+The module `mini_grpo.py` contains a full working script using dummy data and the Llama 3.2 1B model. You should be able to run it locally or in Google colab. 
 
 ## References
 - https://arxiv.org/abs/2501.12948
